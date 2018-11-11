@@ -17,5 +17,7 @@ Route::get('/', function () {
 
 Route::get('/students','StudentController@index')->name('students');
 Route::get('/students/create','StudentController@create')->name('students.create');
+Route::get('/students/{id}/edit','StudentController@edit')->name('students.edit');
+Route::put('/students/{id}/update','StudentController@update')->name('students.update');
 Route::post('/students/store','StudentController@store')->name('students.store');
 //Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');

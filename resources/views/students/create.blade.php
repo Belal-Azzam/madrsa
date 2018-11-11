@@ -16,42 +16,46 @@
                 </div>
             @endif
 
-            <form method="post" action="{{route('students.store')}}">
+            <form method="post" action="{{!$student ? route('students.store') : route('students.update', [$student->id])}}">
                 <div class="form-group">
                     @csrf
+
+                    @if(isset($student))
+                    @method('PUT')
+                    @endif
                     <label for="first_name">First Name</label>
-                    <input id="first_name" type="text" class="form-control" name="first_name">
+                    <input value="{{old('first_name',$student->first_name)}}" id="first_name" type="text" class="form-control" name="first_name">
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last name</label>
-                    <input id="last_name" type="text" class="form-control" name="last_name">
+                    <input value="{{old('last_name',$student->last_name)}}" id="last_name" type="text" class="form-control" name="last_name">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" name="password">
+                    <input value="{{old('password','')}}" type="password" id="password" class="form-control" name="password">
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" class="form-control" name="confirmPassword">
+                    <input value="{{old('password','')}}" type="password" id="confirmPassword" class="form-control" name="confirmPassword">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" name="email">
+                    <input value="{{old('email',$student->email)}}" type="email" id="email" class="form-control" name="email">
                 </div>
                 <div class="form-group">
                     <label for="birth_date">Birth Date</label>
-                    <input type="date" id="birthdate" class="form-control" name="birth_date">
+                    <input value="{{old('birth_date',$student->birth_date)}}" type="date" id="birthdate" class="form-control" name="birth_date">
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input value="1" type="radio" id="customRadioInline1" name="gender" class="custom-control-input">
+                    <input value="1" checked="{{$student->gender == 1 ? 'checked' : ''}}"  type="radio" id="customRadioInline1" name="gender" class="custom-control-input">
                     <label class="custom-control-label" for="customRadioInline1">Male</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input value="2" type="radio" id="customRadioInline2" name="gender" class="custom-control-input">
+                    <input value="2" checked="{{$student->gender == 2 ? 'checked' : ''}}"  type="radio" id="customRadioInline2" name="gender" class="custom-control-input">
                     <label class="custom-control-label" for="customRadioInline2">Female</label>
                 </div>
 
-                <button type="submit" class="float-right btn btn-primary">Add Student</button>
+                <button type="submit" class="float-right btn btn-primary">Save Student</button>
             </form>
         </div>
     </div>

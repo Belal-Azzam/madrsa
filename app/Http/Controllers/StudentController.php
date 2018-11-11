@@ -27,8 +27,26 @@ class StudentController extends Controller
         unset($validated['confirmPassword']);
         $validated['password'] = Hash::make($validated['password']);
         Student::create($validated);
-        $request->session()->flash('alert-success', 'Student added successfully!');
+        $request->session()->flash('alert-success', 'Student saved successfully!');
         return redirect()->route('students');
 
+    }
+
+    public function edit($id)
+    {
+        $student = Student::findOrFail($id);
+
+        return view('students.create', compact('student'));
+    }
+
+    public function update(StoreStudentRequest $request, $id)
+    {
+        $student = Student::findOrFail($id);
+        $validated = $request->validated();
+        unset($validated['confirmPassword']);
+        $validated['password'] = Hash::make($validated['password']);
+        $student->update($validated);
+        $request->session()->flash('alert-success', 'Student saved successfully!');
+        return redirect()->route('students');
     }
 }

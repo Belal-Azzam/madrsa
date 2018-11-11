@@ -23,15 +23,35 @@ class StoreStudentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'password' => 'required',
-            'confirmPassword' => 'required|same:password',
-            'email' => 'required|email|unique:students',
-            'gender' => 'nullable',
-            'birth_date' => 'nullable'
-        ];
+        switch ($this->method()){
+            case 'POST':
+            {
+                return [
+                    //
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'password' => 'required',
+                    'confirmPassword' => 'required|same:password',
+                    'email' => 'required|email|unique:students',
+                    'gender' => 'nullable',
+                    'birth_date' => 'nullable'
+                ];
+            }
+            case 'PUT':
+            {
+                return [
+                    //
+
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'password' => 'required',
+                    'confirmPassword' => 'required|same:password',
+                    'email' => 'required|email',
+                    'gender' => 'nullable',
+                    'birth_date' => 'nullable'
+                ];
+            }
+        }
+
     }
 }

@@ -14,7 +14,7 @@
             </div>
             <div class="col ">
             <a href="#" class=" btn btn-info">View</a>
-            <a href="#" class=" btn btn-primary">Edit</a>
+            <a href="{{route('students.edit', [$student->id])}}" class=" btn btn-primary">Edit</a>
             <a href="#" class=" btn btn-danger">Delete</a>
             </div>
             </div>
