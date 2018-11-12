@@ -49,4 +49,16 @@ class StudentController extends Controller
         $request->session()->flash('alert-success', 'Student saved successfully!');
         return redirect()->route('students');
     }
+
+    public function show($id)
+    {
+        return view('students.show');
+    }
+
+    public function destroy($id)
+    {
+        $student = \App\Student::findOrFail($id);
+        $student->delete();
+        return redirect()->route('students')->with('alert-success', 'Student deleted successfully!');
+    }
 }

@@ -13,9 +13,15 @@
             <h5 class="card-title">{{$student->birth_date}}</h5>
             </div>
             <div class="col ">
-            <a href="#" class=" btn btn-info">View</a>
+                <div class="row">
+            <a href="{{route('students.show', [$student->id])}}" class=" btn btn-info">View</a>
             <a href="{{route('students.edit', [$student->id])}}" class=" btn btn-primary">Edit</a>
-            <a href="#" class=" btn btn-danger">Delete</a>
+            <form action="{{route('students.destroy', [$student->id])}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button  type="submit " class="btn btn-danger">Delete</button>
+            </form>
+                </div>
             </div>
             </div>
         </div>
