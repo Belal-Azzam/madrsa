@@ -50,7 +50,7 @@ class StudentController extends Controller
         return redirect()->route('students');
     }
 
-    public function show($id)
+    public  function show($id)
     {
         return view('students.show');
     }
