@@ -16,4 +16,22 @@ class Student extends Model
         return "{$this->first_name} {$this->last_name}";
 
     }
+
+    const GENDER_TYPE_MALE = 1;
+    const GENDER_TYPE_FEMALE = 2;
+
+    var $genders = [
+        SELF::GENDER_TYPE_FEMALE => 'Female',
+        SELF::GENDER_TYPE_MALE => 'Male'
+    ];
+
+    public function getGenderNameAttribute()
+    {
+        return $this->genders[$this->gender];
+    }
+
+    public function getIdNameAttribute()
+    {
+        return $this->full_name.' - '.'#'.$this->id;
+    }
 }
