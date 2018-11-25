@@ -16,7 +16,7 @@
                 </div>
             @endif
 
-            <form method="post" action="{{!isset($grade) ? route('students.store') : route('grades.update', [$grade->id])}}">
+            <form method="post" action="{{!isset($grade) ? route('grades.store') : route('grades.update', [$grade->id])}}">
                 <div class="form-group">
                     @csrf
 

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Grade;
+use App\Http\Requests\StoreGradeRequest;
 use Illuminate\Http\Request;
-use App\Repositories;
+use \App\Repositories\Repository;
 class GradeController extends Controller
 {
 
@@ -23,7 +24,8 @@ class GradeController extends Controller
     public function index()
     {
         //
-        $this->model->all();
+        $grades = $this->model->all();
+        return view('grades.index', compact('grades'));
     }
 
     /**
@@ -44,9 +46,12 @@ class GradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGradeRequest $request)
     {
         //
+        $validatedData = $request->validated();
+        $this->model->create($validatedData);
+        return redirect()->route('grades.index')->with('alert-success', 'Grade Added Successfully!');
     }
 
     /**
@@ -71,6 +76,7 @@ class GradeController extends Controller
     {
         //
         $grade = $this->model->show($id);
+        return view('grades.create', compact('grade'));
     }
 
     /**
@@ -80,10 +86,11 @@ class GradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreGradeRequest $request, $id)
     {
-        //
-        return $this->model->update($request->all(), $id);
+        $validatedData = $request->validated();
+        $this->model->update($validatedData, $id);
+        return redirect()->route('grades.index')->with('alert-success', 'Grade Saved Successfully!');
     }
 
     /**
@@ -94,6 +101,7 @@ class GradeController extends Controller
      */
     public function destroy($id)
     {
-        return $this->model->delete($id);
+         $this->model->delete($id);
+        return redirect()->route('grades.index')->with('alert-success', 'Grade Deleted Successfully!');
     }
 }

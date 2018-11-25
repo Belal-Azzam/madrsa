@@ -1,7 +1,7 @@
 <?php
-use Illuminate\Database\Eloquent\Model;
 
-namespace \App\Repositories;
+namespace App\Repositories;
+use Illuminate\Database\Eloquent\Model;
 
 class Repository implements RepositoryInterface{
 
@@ -17,7 +17,7 @@ class Repository implements RepositoryInterface{
 
     public function create(array $data)
     {
-        return $this->model->create();
+        return $this->model->create($data);
     }
 
     public function update(array $data, $id)
