@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
 use Illuminate\Http\Request;
-
+use App\Repositories;
 class GradeController extends Controller
 {
+
+    protected $model;
+
+    function __construct(Grade $grade)
+    {
+        $this->model = new Repository($grade);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +23,7 @@ class GradeController extends Controller
     public function index()
     {
         //
+        $this->model->all();
     }
 
     /**
@@ -48,6 +58,7 @@ class GradeController extends Controller
     public function show($id)
     {
         //
+        $grade = $this->model->show($id);
     }
 
     /**
@@ -59,6 +70,7 @@ class GradeController extends Controller
     public function edit($id)
     {
         //
+        $grade = $this->model->show($id);
     }
 
     /**
@@ -71,6 +83,7 @@ class GradeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return $this->model->update($request->all(), $id);
     }
 
     /**
@@ -81,6 +94,6 @@ class GradeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->model->delete($id);
     }
 }
