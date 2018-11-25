@@ -24,4 +24,5 @@ Route::delete('/students/{id}/destroy','StudentController@destroy')->name('stude
 Route::put('/students/{id}/update','StudentController@update')->name('students.update');
 Route::post('/students/store','StudentController@store')->name('students.store');
 
+Route::resource('grades', 'GradeController');
 //Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');
